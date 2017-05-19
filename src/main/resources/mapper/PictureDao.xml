@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.GreenFamer.dao.PictureDao">
+    <insert id="addPicture" parameterType="Picture">
+          insert into picture (title,url)
+          values (#{title},#{url});
+    </insert>
+    <select id="getPictureList" resultType="Picture" parameterType="ResponseInfo">
+        SELECT * FROM picture
+        ORDER BY id desc
+        limit #{start},#{length}
+    </select>
+    <select id="getPictureListCount" resultType="int" parameterType="ResponseInfo">
+        SELECT COUNT(*) FROM picture
+
+    </select>
+    <delete id="deletePicture" parameterType="Picture" >
+        DELETE FROM picture
+        WHERE id={id}
+
+    </delete>
+</mapper>
+
+

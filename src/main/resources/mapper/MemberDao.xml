@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.GreenFamer.dao.MemberDao">
+    <insert id="insertMember" parameterType="Member">
+        INSERT INTO member(account,user_name,psw,phone)
+        VALUES (#{account},#{userName},#{psw},#{phone});
+    </insert>
+    <update id="deleteMember" parameterType="Member">
+        UPDATE member
+        SET state=0
+        WHERE
+        id=${id};
+    </update>
+    <update id="updateMemberState" parameterType="Member">
+        UPDATE member
+        SET state=1
+        WHERE
+        id=${id};
+    </update>
+    <select id="getMember" resultType="Member" parameterType="Member">
+        SELECT *
+        FROM member
+        WHERE account=#{account} OR id=#{id};
+    </select>
+    <select id="getMembers" resultType="Member" parameterType="ResponseInfo">
+        SELECT *
+        FROM member
+        <if test="search != null and search !='' ">
+            WHERE user_name LIKE #{search} OR account LIKE #{search}
+        </if>
+        ORDER BY integral
+        limit ${start},${length};
+    </select>
+    <select id="getMemberCount" parameterType="ResponseInfo" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        <if test="search!=null and search!=''">
+            WHERE user_name LIKE #{search} OR account LIKE #{search}
+        </if>
+    </select>
+    <update id="updateMemberInfo" parameterType="Member">
+        UPDATE member
+        SET phone=#{phone},user_name=#{userName}
+        where id=#{id}
+    </update>
+    <update id="changsPsw" parameterType="Member">
+        UPDATE member
+        SET psw=#{psw}
+        WHERE id=#{id}
+    </update>
+</mapper>
+
+

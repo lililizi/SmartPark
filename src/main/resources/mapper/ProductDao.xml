@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.GreenFamer.dao.ProductDao">
+    <insert id="addProduct" parameterType="Product">
+        INSERT INTO product(title,title_detail,area,number,price,date_start,date_end,pic_urls,html_page_url)
+        VALUES (#{title},#{titleDetail},#{area},#{number},#{price},#{dateStart},#{dateEnd},#{picUrls},#{htmlPageUrl});
+    </insert>
+    <update id="deleteProduct" parameterType="Product">
+        UPDATE product
+        SET state=0
+        WHERE
+        id=${id};
+    </update>
+    <update id="upProduct" parameterType="Product">
+        UPDATE product
+        SET state=1
+        WHERE
+        id=${id};
+    </update>
+    <select id="getProduct" resultType="Product" parameterType="Product">
+        SELECT *
+        FROM product
+        WHERE id=#{id};
+    </select>
+    <select id="getProductListByPage" resultType="Product" parameterType="ResponseInfo">
+        SELECT id id,title title,title_detail titleDetail,price price,area area,sales sales,number number,state state
+        FROM product
+        WHERE date_start<![CDATA[ <= ]]>#{nowDate} AND date_end>= #{nowDate}
+        <if test="search != null and search !='' ">
+            AND( title LIKE #{search} OR title_detail LIKE #{search} )
+        </if>
+            ORDER BY sales
+        limit ${start},${length};
+
+    </select>
+    <select id="getProductListCountByPage" parameterType="ResponseInfo" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        WHERE date_start<![CDATA[ <= ]]>#{nowDate} AND date_end>= #{nowDate}
+        <if test="search!=null and search!=''">
+            And (title LIKE #{search} OR title_detail LIKE #{search})
+        </if>
+    </select>
+
+    <select id="getProductListByClient" resultType="Product" parameterType="ResponseInfo">
+        SELECT id id,title title,title_detail titleDetail ,price price,area area,sales sales,pic_urls picUrls
+        FROM product
+        WHERE date_start<![CDATA[ <= ]]>#{nowDate} AND date_end>= #{nowDate} AND state=1
+        <if test="search != null and search !='' ">
+            AND( title LIKE #{search} OR title_detail LIKE #{search} )
+        </if>
+        ORDER BY sales
+        limit ${start},${length};
+
+    </select>
+    <select id="getProductListCountByClient" parameterType="ResponseInfo" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        WHERE date_start<![CDATA[ <= ]]>#{nowDate} AND date_end>= #{nowDate} AND state=1
+        <if test="search!=null and search!=''">
+            And (title LIKE #{search} OR title_detail LIKE #{search})
+        </if>
+    </select>
+    <select id="getUnSaleProduct" resultType="Product" parameterType="ResponseInfo">
+        SELECT *
+        FROM product
+        WHERE date_start>= #{nowDate} OR date_end<![CDATA[ <= ]]> #{nowDate}
+        ORDER BY sales
+        limit ${start},${length};
+
+    </select>
+    <select id="getUnSaleProductCount" parameterType="ResponseInfo" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        WHERE date_start>= #{nowDate} OR date_end <![CDATA[ <= ]]>#{nowDate}
+    </select>
+
+    <update id="updateProductInfo" parameterType="Product">
+        UPDATE product
+        SET phone=#{phone},user_name=#{userName}
+        where id=#{id}
+    </update>
+</mapper>
+
+

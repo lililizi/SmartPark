@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.GreenFamer.dao.OrderDetailDao">
+    <insert id="insertOrderDetail" parameterType="OrderDetail">
+          insert into order_detail (order_id,product_id,price,num)
+          values (#{orderId},#{productId},#{price},#{num});
+    </insert>
+    <select id="getOrderDetailList" resultType="OrderDetail" parameterType="Orders">
+        SELECT * FROM order_detail
+        WHERE  orderId=#{id}
+    </select>
+
+</mapper>
+
+
