@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.SmartPark.dao.ParkDao">
+    <select id="getParkList" parameterType="ResponseInfo" resultType="Park">
+        SELECT * FROM park
+        WHERE start_time<![CDATA[ <= ]]>#{nowTime} AND end_Time>=#{nowTime}
+        <if test="search!=null and search!=''">
+            AND name LIKE concat(concat('%',#{search}),'%')
+        </if>
+    </select>
+    <update id="appointPark" parameterType="Park">
+        UPDATE park
+        SET pack_num=pack_num-1,future_parks=future_parks+1
+        WHERE id=#{id}
+    </update>
+    <update id="arrivePark" parameterType="Park">
+        UPDATE park
+        SET future_parks=future_parks-1,now_parks=now_parks+1
+        WHERE id=#{id}
+    </update>
+    <select id="getPark" parameterType="Appoint">
+        SELECT * from park
+        where id=#{p_id}
+    </select>
+</mapper>
+
+

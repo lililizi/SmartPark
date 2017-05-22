@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.SmartPark.dao.UserDao">
+    <insert id="registerUser" parameterType="User">
+        INSERT ignore into user (account,user_name,psw,phone,email)
+        VALUES (#{account},#{userName},#{psw},#{phone},#{email});
+    </insert>
+    <select id="getUser" parameterType="User" resultType="User">
+        SELECT * FROM user
+        where account=#{account}
+    </select>
+    <update id="arriverl" parameterType="Appoint">
+        UPDATE user
+        <choose>
+            <when test="createTime != null">
+                SET credit=credit-10
+            </when>
+            <when test="createTime = null">
+                SET credit=credit+10
+            </when>
+        </choose>
+        WHERE  id=#{id}
+    </update>
+</mapper>
+
+
