@@ -8,5 +8,6 @@ import org.SmartPark.bean.ResponseInfo;
 public interface ParkService {
     public ResponseInfo getParkList(ResponseInfo responseInfo);
     public ResponseInfo appointPark(ResponseInfo responseInfo);
-    public ResponseInfo arrivePark(ResponseInfo responseInfo);
+    public ResponseInfo arrivelParkOrCancel(ResponseInfo responseInfo);
+    public ResponseInfo getParkInfo(ResponseInfo responseInfo);
 }

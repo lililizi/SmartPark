@@ -9,8 +9,17 @@ public class Appoint {
     private long id;
     private long uId;
     private long pId;
+    private byte state;
     private Date createTime;
     private Date appointTime;
+
+    public byte getState() {
+        return state;
+    }
+
+    public void setState(byte state) {
+        this.state = state;
+    }
 
     public long getId() {
         return id;

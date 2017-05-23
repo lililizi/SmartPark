@@ -12,7 +12,7 @@ public class ResponseInfo<T>{
     private T data;
     private String error;
     private String search;
-    private Time nowTime;
+    private String nowTime;
 
     public boolean isSuccess() {
         return success;
@@ -46,11 +46,11 @@ public class ResponseInfo<T>{
         this.search = search;
     }
 
-    public Time getNowTime() {
+    public String getNowTime() {
         return nowTime;
     }
 
-    public void setNowTime(Time nowTime) {
+    public void setNowTime(String nowTime) {
         this.nowTime = nowTime;
     }
 

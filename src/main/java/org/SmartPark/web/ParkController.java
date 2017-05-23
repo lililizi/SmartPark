@@ -1,5 +1,7 @@
 package org.SmartPark.web;
 
+import org.SmartPark.bean.Appoint;
+import org.SmartPark.bean.Park;
 import org.SmartPark.bean.ResponseInfo;
 import org.SmartPark.service.ParkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +25,27 @@ public class ParkController {
         return parkService.getParkList(responseInfo);
     }
 
+    @RequestMapping(value = "/get",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public ResponseInfo getPark(Park park){
+        ResponseInfo responseInfo=new ResponseInfo();
+        responseInfo.setData(park);
+        return parkService.getParkInfo(responseInfo);
+    }
+
+    @RequestMapping(value = "/appoint",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public ResponseInfo appointPark(Appoint appoint){
+        ResponseInfo responseInfo=new ResponseInfo();
+        responseInfo.setData(appoint);
+        return parkService.appointPark(responseInfo);
+    }
+
+    @RequestMapping(value = "/ArrivelOrCancle",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public ResponseInfo ArrivelCancle(Appoint appoint){
+        ResponseInfo responseInfo=new ResponseInfo();
+        responseInfo.setData(appoint);
+        return parkService.arrivelParkOrCancel(responseInfo);
+    }
 }

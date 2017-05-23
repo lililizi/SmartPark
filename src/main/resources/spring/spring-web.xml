@@ -15,7 +15,11 @@
     <mvc:default-servlet-handler/>
 
 
-
+    <bean id="resolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/">
+        </property>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
     <bean id="multipartResolver"
                      class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
