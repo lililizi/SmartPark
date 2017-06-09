@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.SmartPark.dao.AppointDao">
-    <insert id="insertAppoint" parameterType="Appoint">
+    <insert id="insertAppoint" useGeneratedKeys="true" keyProperty="id" parameterType="Appoint">
         INSERT ignore into appoint (u_id,p_id,appoint_time)
         VALUES (#{uId},#{pId},#{appointTime});
     </insert>
@@ -12,14 +12,14 @@
         WHERE u_id=#{uId}
         ORDER BY create_time desc
     </select>
-    <select id="getNowAppoint" parameterType="Appoint" resultType="Appoint">
+    <select id="getNowAppoint" parameterType="Appoint" resultType="int">
         SELECT COUNT(*) FROM appoint
         WHERE u_id=#{uId} AND state=1
     </select>
     <update id="arrivelParkOrCancel" parameterType="Appoint">
         UPDATE appoint
         SET state=#{state}
-        WHERE id=#{id}
+        WHERE id=#{id} AND u_id=#{uId}
     </update>
  </mapper>
 

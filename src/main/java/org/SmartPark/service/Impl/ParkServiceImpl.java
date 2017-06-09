@@ -49,16 +49,16 @@ public class ParkServiceImpl implements ParkService {
             return new ResponseInfo(false,"车位已全部占用");
         }
         //确认是否已有预约
-        Appoint appoint1=appointDao.getNowAppoint(appoint);
-        if (appoint1==null)
+        int appointNum=appointDao.getNowAppoint(appoint);
+        if (appointNum!=0)
             return new ResponseInfo(false,"已有预约未完成");
         int count=parkDao.appointPark(park);
         if (count!=1)
             return new ResponseInfo(false,"系统错误");
-        appoint.setAppointTime(new Date());
         count=appointDao.insertAppoint(appoint);
-        if (count==1)
-            return new ResponseInfo(true);
+        if (count==1){
+            return new ResponseInfo(true,appoint);
+        }
         return new ResponseInfo(false,"系统异常");
     }
 

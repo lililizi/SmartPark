@@ -12,7 +12,7 @@
     </select>
     <update id="appointPark" parameterType="Park">
         UPDATE park
-        SET pack_num=pack_num-1,future_parks=future_parks+1
+        SET park_num=park_num-1,future_parks=future_parks+1
         WHERE id=#{id}
     </update>
     <update id="arrivePark" parameterType="Park">
@@ -20,9 +20,10 @@
         SET future_parks=future_parks-1,now_parks=now_parks+1
         WHERE id=#{id}
     </update>
-    <select id="getPark" parameterType="Appoint">
-        SELECT * from park
-        where id=#{p_id}
+    <select id="getPark" resultType="Park" parameterType="Appoint">
+        SELECT *
+        FROM park
+        where id=#{pId}
     </select>
 </mapper>
 

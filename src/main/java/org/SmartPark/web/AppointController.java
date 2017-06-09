@@ -1,5 +1,6 @@
 package org.SmartPark.web;
 
+import org.SmartPark.bean.Appoint;
 import org.SmartPark.bean.ResponseInfo;
 import org.SmartPark.service.AppointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,9 @@ public class AppointController {
     private AppointService appointService;
     @RequestMapping(value = "/list",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ResponseInfo getParkList(ResponseInfo responseInfo){
-        System.out.println(responseInfo.getSearch());
+    public ResponseInfo getParkList(Appoint appoint){
+        ResponseInfo responseInfo=new ResponseInfo();
+        responseInfo.setData(appoint);
         return appointService.getList(responseInfo);
     }
 

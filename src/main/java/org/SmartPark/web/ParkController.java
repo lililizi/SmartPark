@@ -21,7 +21,6 @@ public class ParkController {
     @RequestMapping(value = "/list",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     @ResponseBody
     public ResponseInfo getParkList(ResponseInfo responseInfo){
-        System.out.println(responseInfo.getSearch());
         return parkService.getParkList(responseInfo);
     }
 

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.SmartPark.dao.OrderDao">
     <insert id="insertOrder" parameterType="Order">
-        INSERT ignore into order (a_id)
+        INSERT ignore into orders (a_id)
         VALUES (#{id});
     </insert>
 </mapper>

@@ -19,6 +19,7 @@ public class AppointServiceImpl implements AppointService {
     public ResponseInfo getList(ResponseInfo responseInfo) {
         Appoint appoint=(Appoint)responseInfo.getData();
         List<Appoint> list=appointDao.getList(appoint);
+        System.out.println(list);
         if (list.size()!=0)
             return new ResponseInfo(true,list);
         return new ResponseInfo(false,"没有预约信息");

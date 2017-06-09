@@ -10,6 +10,6 @@ import java.util.List;
 public interface AppointDao {
     public int insertAppoint(Appoint appoint);
     public List<Appoint> getList(Appoint appoint);
-    public Appoint getNowAppoint(Appoint appoint);
+    public int getNowAppoint(Appoint appoint);
     public int arrivelParkOrCancel(Appoint appoint);
 }

@@ -60,4 +60,16 @@ public class Appoint {
     public void setAppointTime(Date appointTime) {
         this.appointTime = appointTime;
     }
+
+    @Override
+    public String toString() {
+        return "Appoint{" +
+                "id=" + id +
+                ", uId=" + uId +
+                ", pId=" + pId +
+                ", state=" + state +
+                ", createTime=" + createTime +
+                ", appointTime=" + appointTime +
+                '}';
+    }
 }
